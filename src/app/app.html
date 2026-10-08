@@ -1,0 +1,38 @@
+<div class="app-viewport">
+  <div class="app-frame">
+    <app-topbar></app-topbar>
+
+    <main class="main-layout" [class.has-booking]="doctorService.isBookingOpen()">
+      <div class="content-column">
+        <!-- Welcome Banner -->
+        <section class="welcome-banner">
+          <div class="banner-icon-badge">
+            <svg class="banner-stethoscope" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/>
+              <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/>
+              <circle cx="20" cy="10" r="2"/>
+            </svg>
+          </div>
+          <div class="banner-info">
+            <span class="welcome-small">Welcome to HealthLink</span>
+            <h1 class="welcome-heading">Consult a Doctor</h1>
+            <p class="welcome-sub">Chat or video call with a licensed doctor, 9am–10pm daily.</p>
+          </div>
+        </section>
+
+        <!-- Two columns for Available Doctors & My Consultations -->
+        <div class="two-columns-grid">
+          <app-doctor-list></app-doctor-list>
+          <app-my-consultations></app-my-consultations>
+        </div>
+      </div>
+
+      <!-- Right column for Booking Form -->
+      @if (doctorService.isBookingOpen()) {
+        <aside class="booking-column">
+          <app-booking-form></app-booking-form>
+        </aside>
+      }
+    </main>
+  </div>
+</div>

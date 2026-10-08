@@ -1,0 +1,141 @@
+.app-viewport {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px;
+}
+
+.app-frame {
+  width: 100%;
+  max-width: 1340px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-layout {
+  padding: 24px 28px;
+  background: #f8fafc;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  min-height: 600px;
+}
+
+.content-column {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.booking-column {
+  width: 360px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 24px;
+}
+
+.welcome-banner {
+  background: linear-gradient(135deg, #e0f2fe 0%, #f0fdfa 100%);
+  border: 1px solid #bae6fd;
+  border-radius: 16px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.banner-icon-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #0284c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.15);
+  flex-shrink: 0;
+}
+
+.banner-stethoscope {
+  width: 26px;
+  height: 26px;
+  color: #0284c7;
+}
+
+.banner-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-small {
+  font-size: 12px;
+  font-weight: 600;
+  color: #0284c7;
+  margin-bottom: 2px;
+}
+
+.welcome-heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 3px;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.welcome-sub {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.two-columns-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 1080px) {
+  .main-layout {
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .booking-column {
+    width: 100%;
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .two-columns-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-viewport {
+    padding: 8px;
+  }
+
+  .welcome-banner {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .welcome-heading {
+    font-size: 20px;
+  }
+}

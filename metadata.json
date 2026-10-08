@@ -1,0 +1,8 @@
+{
+  "name": "HealthLink",
+  "description": "Doctor consultation and appointment booking platform",
+  "prompt": "HealthLink doctor consultation and booking platform",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
