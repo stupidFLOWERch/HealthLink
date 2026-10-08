@@ -1,0 +1,16 @@
+<section class="my-consultations">
+    <h2>My Consultations</h2>
+    <p class="subtitle">View your upcoming and past consultations.</p>
+  
+    <div class="consultation-card" *ngFor="let c of consultations">
+      <div class="consultation-info">
+        <h3>{{ c.doctorName }}</h3>
+        <p>{{ c.specialty }} · {{ c.type }}</p>
+        <p class="time">{{ c.preferredTime | date:'dd MMM yyyy, h:mm a' }}</p>
+      </div>
+      <span class="status" [class.scheduled]="c.status === 'Scheduled'"
+                           [class.completed]="c.status === 'Completed'">
+        {{ c.status }}
+      </span>
+    </div>
+  </section>
