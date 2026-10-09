@@ -1,6 +1,7 @@
-import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, inject, effect, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConsultationService } from '../../services/consultation.service';
+import { BookingStateService } from '../../services/booking-state.service';
 import { Consultation } from '../../models/consultation.model';
 
 @Component({
@@ -11,20 +12,27 @@ import { Consultation } from '../../models/consultation.model';
 })
 export class MyConsultations implements OnInit {
   private consultationService = inject(ConsultationService);
+  private bookingState = inject(BookingStateService);
   private cdr = inject(ChangeDetectorRef);
 
   consultations: Consultation[] = [];
 
+  constructor() {
+    // 监听「提交成功」信号，每次变化就重新拉数据
+    effect(() => {
+      this.bookingState.consultationCreated();   // 读一下，建立依赖
+      this.loadConsultations();
+    });
+  }
+
   ngOnInit(): void {
-    this.consultationService.getConsultations().subscribe({
-      next: (data) => {
-        console.log('consultations from API:', data);
-        this.consultations = data;
-        this.cdr.detectChanges();
-      },
-      error: (err) => {
-        console.error('API error:', err);
-      },
+    this.loadConsultations();
+  }
+
+  private loadConsultations(): void {
+    this.consultationService.getConsultations().subscribe((data) => {
+      this.consultations = data;
+      this.cdr.detectChanges();
     });
   }
 

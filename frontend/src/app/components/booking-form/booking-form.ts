@@ -66,6 +66,7 @@ export class BookingForm {
       preferredTime: values.preferredTime,
       reason: values.reason,
     }).subscribe(() => {
+      this.bookingState.notifyConsultationCreated();
       this.bookingSuccess.set(true);
       setTimeout(() => {
         this.bookingSuccess.set(false);
