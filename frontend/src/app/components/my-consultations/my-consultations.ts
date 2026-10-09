@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConsultationService } from '../../services/consultation.service';
 import { Consultation } from '../../models/consultation.model';
@@ -11,11 +11,20 @@ import { Consultation } from '../../models/consultation.model';
 })
 export class MyConsultations implements OnInit {
   private consultationService = inject(ConsultationService);
+  private cdr = inject(ChangeDetectorRef);
+
   consultations: Consultation[] = [];
 
   ngOnInit(): void {
-    this.consultationService.getConsultations().subscribe((data) => {
-      this.consultations = data;
+    this.consultationService.getConsultations().subscribe({
+      next: (data) => {
+        console.log('consultations from API:', data);
+        this.consultations = data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('API error:', err);
+      },
     });
   }
 

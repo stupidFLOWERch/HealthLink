@@ -5,7 +5,7 @@
     "doctorName": "Dr. Sarah Lim",
     "specialty": "General Practitioner",
     "type": "Chat",
-    "preferredTime": "2026-10-08T15:30:00",
+    "preferredTime": "2026-10-01T15:30:00",
     "reason": "Fever and sore throat for 2 days",
     "status": "Scheduled"
   },
@@ -18,5 +18,15 @@
     "preferredTime": "2026-09-08T10:00:00",
     "reason": "Follow-up consultation",
     "status": "Completed"
+  },
+  {
+    "id": 3,
+    "doctorId": 3,
+    "doctorName": "Dr. Priya Nair",
+    "specialty": "Internal Medicine",
+    "type": "Chat",
+    "preferredTime": "Today, 3:30 PM",
+    "reason": "Fever and sore throat for 2 days...",
+    "status": "Scheduled"
   }
 ]

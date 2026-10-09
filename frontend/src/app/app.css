@@ -19,6 +19,10 @@
   flex-direction: column;
 }
 
+app-topbar {
+  display: block;
+  width: 100%;
+}
 .main-layout {
   padding: 24px 28px;
   background: #f8fafc;
@@ -39,18 +43,22 @@
 .booking-column {
   width: 360px;
   flex-shrink: 0;
-  position: sticky;
-  top: 24px;
+  border-left: 1px solid #e5e7eb;
+  background: white;
+  padding: 24px;             /* 内部留白 */
+  /* 去掉 position: sticky */
+  /* 去掉 top: 24px */
+  align-self: stretch;       /* 撑满高度 */
 }
 
 .welcome-banner {
   background: linear-gradient(135deg, #e0f2fe 0%, #f0fdfa 100%);
-  border: 1px solid #bae6fd;
-  border-radius: 16px;
-  padding: 20px 24px;
+  padding: 20px 28px;
   display: flex;
   align-items: center;
   gap: 18px;
+  margin: -24px -28px 0;   /* ← 关键：抵消 .content-column 的 padding */
+  /* 不要 border-radius，不要 border */
 }
 
 .banner-icon-badge {
