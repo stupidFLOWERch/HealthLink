@@ -18,7 +18,7 @@
     @for (c of consultations; track c.id) {
       <div class="consultation-item-card">
         <div class="consultation-left">
-          <div class="type-icon-box" [class.chat-type]="c.type === 'Chat'" [class.video-type]="c.type === 'Video'">
+          <div class="type-icon-box" [class.scheduled-type]="c.status === 'Scheduled'" [class.completed-type]="c.status === 'Completed'">
             @if (c.type === 'Chat') {
               <svg class="type-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>

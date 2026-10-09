@@ -16,11 +16,18 @@ export class BookingForm {
   private readonly consultationService = inject(ConsultationService);
 
   readonly timeSlots = [
+    'Today, 10:00 AM',
+    'Today, 11:30 AM',
+    'Today, 2:00 PM',
     'Today, 3:30 PM',
-    'Today, 4:30 PM',
+    'Today, 6:00 PM',
+    'Today, 8:00 PM',
     'Tomorrow, 10:00 AM',
-    'Tomorrow, 2:30 PM',
-    'Tomorrow, 4:00 PM',
+    'Tomorrow, 11:30 AM',
+    'Tomorrow, 2:00 PM',
+    'Tomorrow, 3:30 PM',
+    'Tomorrow, 6:00 PM',
+    'Tomorrow, 8:00 PM',
   ];
 
   readonly bookingSuccess = signal<boolean>(false);

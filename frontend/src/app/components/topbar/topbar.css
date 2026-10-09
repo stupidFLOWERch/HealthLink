@@ -1,5 +1,6 @@
 .topbar {
   display: flex;
+  position: relative;  
   justify-content: space-between;
   align-items: center;
   padding: 14px 28px;
@@ -21,21 +22,11 @@
   user-select: none;
 }
 
-.logo-icon-wrap {
-  width: 28px;
+.logo-img {
+  width: 28px;             /* 按你的图片比例调 */
   height: 28px;
-  border-radius: 8px;
-  background: #f0fdfa;
-  color: #0284c7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo-icon {
-  width: 22px;
-  height: 22px;
-  color: #0284c7;
+  object-fit: contain;
+  display: block;
 }
 
 .logo-text {
@@ -52,22 +43,29 @@
 }
 
 .nav-item {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 7px;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 13px;
+  gap: 6px;
+  padding: 6px 12px;
+  color: #374151;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.15s ease;
-  font-weight: 500;
+  position: relative;          /* ← 改成 relative */
 }
 
 .nav-item.active {
-  background: #f0f9ff;
-  border: 1px solid #bae6fd;
   color: #0284c7;
+  font-weight: 500;
+}
+
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -17px;               /* ← 负值，往下拉到底部 */
+  height: 3px;
+  background: #0284c7;
 }
 
 .nav-home-icon {

@@ -23,61 +23,67 @@ app-topbar {
   display: block;
   width: 100%;
 }
+
+/* main-layout：去掉 padding，让子元素自己控制 */
 .main-layout {
-  padding: 24px 28px;
+  padding: 0;
   background: #f8fafc;
   display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  min-height: 600px;
+  gap: 0;
+  align-items: stretch;      /* ← 让子元素撑满高度 */
+  min-height: 700px;
 }
 
+/* content-column：自己带 padding，保持原来的留白 */
 .content-column {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding: 24px 28px;        /* ← padding 从 main-layout 移到这里 */
 }
 
-.booking-column {
-  width: 360px;
-  flex-shrink: 0;
-  border-left: 1px solid #e5e7eb;
-  background: white;
-  padding: 24px;             /* 内部留白 */
-  /* 去掉 position: sticky */
-  /* 去掉 top: 24px */
-  align-self: stretch;       /* 撑满高度 */
-}
-
+/* welcome banner：不再需要负 margin */
 .welcome-banner {
   background: linear-gradient(135deg, #e0f2fe 0%, #f0fdfa 100%);
   padding: 20px 28px;
   display: flex;
   align-items: center;
   gap: 18px;
-  margin: -24px -28px 0;   /* ← 关键：抵消 .content-column 的 padding */
-  /* 不要 border-radius，不要 border */
+  margin: -24px -28px 0;     /* ← 保留负 margin，抵消 content-column 的 padding */
 }
+
+/* booking-column：贴右，贴上，贴下 */
+.booking-column {
+  width: 360px;
+  flex-shrink: 0;
+  border-left: 1px solid #e5e7eb;
+  background: white;
+  padding: 24px;
+  align-self: stretch;       /* ← 撑满高度 */
+  /* 不要 position: sticky */
+}
+
+/* 其他样式保持不变 */
 
 .banner-icon-badge {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: #ffffff;
-  color: #0284c7;
+  background: #ecfeff;        /* 极淡青蓝 */
+  color: #0891b2;             /* cyan 蓝绿 */
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.15);
+  box-shadow: 0 2px 8px rgba(8, 145, 178, 0.12);
   flex-shrink: 0;
 }
 
 .banner-stethoscope {
   width: 26px;
   height: 26px;
-  color: #0284c7;
+  color: #0891b2;
 }
 
 .banner-info {
@@ -95,7 +101,7 @@ app-topbar {
 .welcome-heading {
   font-size: 24px;
   font-weight: 700;
-  color: #0f172a;
+  color: #075985;
   margin-bottom: 3px;
   letter-spacing: -0.015em;
   line-height: 1.2;
@@ -112,18 +118,19 @@ app-topbar {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+  align-items: stretch;
 }
 
 @media (max-width: 1080px) {
   .main-layout {
     flex-direction: column;
-    padding: 16px;
-    gap: 16px;
+    padding: 0;
+    gap: 0;
   }
 
   .booking-column {
     width: 100%;
-    position: static;
+    align-self: auto;
   }
 }
 
@@ -138,9 +145,14 @@ app-topbar {
     padding: 8px;
   }
 
+  .content-column {
+    padding: 16px;
+  }
+
   .welcome-banner {
     padding: 16px;
     gap: 12px;
+    margin: -16px -16px 0;
   }
 
   .welcome-heading {

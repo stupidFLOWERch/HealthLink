@@ -1,9 +1,19 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .consultations-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* 去掉 min-height */
 }
 
 .section-header {
@@ -21,7 +31,6 @@
   width: 26px;
   height: 26px;
   border-radius: 6px;
-  background: #f0f9ff;
   color: #0284c7;
   display: flex;
   align-items: center;
@@ -37,7 +46,7 @@
 .section-title {
   font-size: 15px;
   font-weight: 700;
-  color: #0f172a;
+  color: #075985;
   letter-spacing: -0.01em;
 }
 
@@ -50,20 +59,19 @@
 .consultations-container {
   display: flex;
   flex-direction: column;
-  gap: 12px;
 }
 
 .consultation-item-card {
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 12px 14px;
+  padding: 16px 14px;
   background: #ffffff;
   display: flex;
-  align-items: center;
+  align-items: flex-start;      /* ← 贴顶 */
   justify-content: space-between;
   gap: 12px;
   transition: all 0.15s ease;
   cursor: pointer;
+  position: relative;            /* ← 加这行，给箭头做定位参考 */
 }
 
 .consultation-item-card:hover {
@@ -73,7 +81,7 @@
 
 .consultation-left {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   min-width: 0;
 }
@@ -88,14 +96,16 @@
   flex-shrink: 0;
 }
 
-.type-icon-box.chat-type {
-  background: #eff6ff;
-  color: #0284c7;
+.type-icon-box.scheduled-type {
+  background: #dbeafe;        /* ← 从 #eff6ff 换成稍深的浅蓝 */
+  color: #0369a1; 
+  border-radius: 16px;
 }
 
-.type-icon-box.video-type {
-  background: #f0fdf4;
-  color: #16a34a;
+.type-icon-box.completed-type {
+  background: #dcfce7;      /* 浅绿底，可保持 */
+  color: #15803d;           /* ← 从 #16a34a 换成更深的 #15803d */
+  border-radius: 16px;
 }
 
 .type-svg {
@@ -107,12 +117,13 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  gap: 6px; 
 }
 
 .doctor-title {
   font-size: 13.5px;
   font-weight: 700;
-  color: #0f172a;
+  color: #075985;
   margin-bottom: 2px;
   white-space: nowrap;
   overflow: hidden;
@@ -142,9 +153,10 @@
 
 .consultation-right {
   display: flex;
-  align-items: center;
+  align-items: flex-start;      /* ← badge 贴顶 */
   gap: 6px;
   flex-shrink: 0;
+  padding-right: 20px;          /* ← 给箭头留出空间，避免遮挡 */
 }
 
 .status-badge {
@@ -157,19 +169,24 @@
 }
 
 .status-badge.scheduled {
-  background: #f5f3ff;
-  color: #7c3aed;
-  border: 1px solid #ddd6fe;
+  background: #ede9fe;
+  color: #6d28d9;             /* ← 从 #7c3aed 换成更深的 #6d28d9 */
+  border: 1px solid #c4b5fd;
+  
 }
 
 .status-badge.completed {
-  background: #f0fdf4;
-  color: #16a34a;
+  background: #dcfce7;
+  color: #15803d;
   border: 1px solid #bbf7d0;
 }
 
 .chevron-right {
-  width: 15px;
-  height: 15px;
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;             /* ← 从 15px 改成 18px */
+  height: 18px;
   color: #94a3b8;
 }

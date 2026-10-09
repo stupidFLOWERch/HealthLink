@@ -5,7 +5,8 @@ import { readJson, writeJson } from '../storage/jsonSotre';
 
 export function listConsultations(_req:Request, res:Response): void {
     const consultations = readJson<Consultation>('consultations.json');
-    res.json(consultations);
+    const sorted = [...consultations].sort((a, b) => b.id - a.id);   // ← 按 id 降序
+    res.json(sorted);
 }
 
 export function createConsultation(req: Request, res: Response): void {
