@@ -1,28 +1,15 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Doctor } from '../models/doctor.model';
-import { DOCTORS_SEED } from '../data/doctors.seed';
+
 
 @Injectable({ providedIn: 'root' })
 export class DoctorService {
-  readonly selectedDoctor = signal<Doctor | null>(DOCTORS_SEED[1]);
-  readonly isBookingOpen = signal<boolean>(true);
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:3000';
 
   getDoctors(): Observable<Doctor[]> {
-    return of(DOCTORS_SEED);
-  }
-
-  selectDoctor(doctor: Doctor): void {
-    this.selectedDoctor.set(doctor);
-    this.isBookingOpen.set(true);
-  }
-
-  openBooking(doctor: Doctor): void {
-    this.selectedDoctor.set(doctor);
-    this.isBookingOpen.set(true);
-  }
-
-  closeBooking(): void {
-    this.isBookingOpen.set(false);
+    return this.http.get<Doctor[]>(`${this.apiUrl}/doctors`);
   }
 }

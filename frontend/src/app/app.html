@@ -2,7 +2,7 @@
   <div class="app-frame">
     <app-topbar></app-topbar>
 
-    <main class="main-layout" [class.has-booking]="doctorService.isBookingOpen()">
+    <main class="main-layout" [class.has-booking]="bookingStateRef.isBookingOpen()">
       <div class="content-column">
         <!-- Welcome Banner -->
         <section class="welcome-banner">
@@ -28,7 +28,7 @@
       </div>
 
       <!-- Right column for Booking Form -->
-      @if (doctorService.isBookingOpen()) {
+      @if (bookingStateRef.isBookingOpen()) {
         <aside class="booking-column">
           <app-booking-form></app-booking-form>
         </aside>

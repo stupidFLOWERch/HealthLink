@@ -16,10 +16,10 @@
 
   <div class="doctors-container">
     @for (doctor of doctors; track doctor.id) {
-      <div 
-        class="doctor-item-card" 
-        [class.selected]="doctorService.selectedDoctor()?.id === doctor.id"
-        (click)="selectDoctor(doctor)">
+      <div
+        class="doctor-item-card"
+        [class.selected]="bookingStateRef.selectedDoctor()?.id === doctor.id"
+        (click)="onBook(doctor)">
         <div class="doctor-main">
           <div class="avatar-container">
             @if (doctor.photoUrl) {
@@ -45,7 +45,7 @@
           </div>
         </div>
 
-        <button class="book-btn" (click)="bookConsultation(doctor, $event)">
+        <button class="book-btn" (click)="onBook(doctor); $event.stopPropagation()">
           <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>

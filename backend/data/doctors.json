@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Dr. Sarah Lim",
+    "specialty": "General Practitioner",
+    "available": true,
+    "photoUrl": "/images/doctor-sarah.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Dr. Aiman Rashid",
+    "specialty": "Family Medicine",
+    "available": true,
+    "photoUrl": "/images/doctor-aiman.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Dr. Priya Nair",
+    "specialty": "Internal Medicine",
+    "available": true,
+    "photoUrl": "/images/doctor-priya.jpg"
+  }
+]

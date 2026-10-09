@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { DoctorService } from '../../services/doctor.service';
+import { BookingStateService } from '../../services/booking-state.service';
 import { ConsultationService } from '../../services/consultation.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { ConsultationService } from '../../services/consultation.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookingForm {
-  protected readonly doctorService = inject(DoctorService);
+  protected readonly bookingState = inject(BookingStateService);
   private readonly consultationService = inject(ConsultationService);
 
   readonly timeSlots = [
@@ -43,11 +43,11 @@ export class BookingForm {
   }
 
   close(): void {
-    this.doctorService.closeBooking();
+    this.bookingState.closeBooking();
   }
 
   confirmBooking(): void {
-    const doctor = this.doctorService.selectedDoctor();
+    const doctor = this.bookingState.selectedDoctor();
     if (!doctor) return;
 
     const values = this.bookingForm.getRawValue();
@@ -58,11 +58,12 @@ export class BookingForm {
       type: values.consultationType,
       preferredTime: values.preferredTime,
       reason: values.reason,
+    }).subscribe(() => {
+      this.bookingSuccess.set(true);
+      setTimeout(() => {
+        this.bookingSuccess.set(false);
+        this.close();
+      }, 3000);
     });
-
-    this.bookingSuccess.set(true);
-    setTimeout(() => {
-      this.bookingSuccess.set(false);
-    }, 3000);
   }
 }

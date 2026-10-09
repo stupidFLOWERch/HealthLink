@@ -1,16 +1,18 @@
-import { Component, inject } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { Topbar } from './components/topbar/topbar';
 import { DoctorList } from './components/doctor-list/doctor-list';
 import { MyConsultations } from './components/my-consultations/my-consultations';
-import { Topbar } from './components/topbar/topbar';
 import { BookingForm } from './components/booking-form/booking-form';
-import { DoctorService } from './services/doctor.service';
+import { BookingStateService } from './services/booking-state.service';
 
 @Component({
-  imports: [Topbar, DoctorList, MyConsultations, BookingForm],
+  imports: [RouterOutlet, Topbar, DoctorList, MyConsultations, BookingForm],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly doctorService = inject(DoctorService);
+  protected readonly title = signal('frontend');
+  bookingStateRef = inject(BookingStateService);   // ← 加这行
 }

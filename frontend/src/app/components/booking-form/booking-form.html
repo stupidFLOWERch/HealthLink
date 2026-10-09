@@ -4,7 +4,7 @@
     <div class="header-text">
       <h2 class="panel-title">Book Consultation</h2>
       <p class="panel-subtitle">
-        Schedule a consultation with {{ doctorService.selectedDoctor()?.name || 'Doctor' }}
+        Schedule a consultation with {{ bookingState.selectedDoctor()?.name || 'Doctor' }}
       </p>
     </div>
     <button type="button" class="close-btn" (click)="close()" aria-label="Close booking">
@@ -15,7 +15,7 @@
     </button>
   </div>
 
-  @if (doctorService.selectedDoctor(); as doc) {
+  @if (bookingState.selectedDoctor(); as doc) {
     <!-- Selected Doctor Summary Box -->
     <div class="selected-doctor-box">
       <div class="doc-avatar-wrap">

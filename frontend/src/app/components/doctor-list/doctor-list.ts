@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DoctorService } from '../../services/doctor.service';
+import { BookingStateService } from '../../services/booking-state.service';
 import { Doctor } from '../../models/doctor.model';
 
 @Component({
@@ -10,21 +11,20 @@ import { Doctor } from '../../models/doctor.model';
   styleUrl: './doctor-list.css',
 })
 export class DoctorList implements OnInit {
-  protected readonly doctorService = inject(DoctorService);
+  private doctorService = inject(DoctorService);
+  private bookingState = inject(BookingStateService);
+
   doctors: Doctor[] = [];
 
+  bookingStateRef = this.bookingState;
+  
   ngOnInit(): void {
     this.doctorService.getDoctors().subscribe((data) => {
       this.doctors = data;
     });
   }
 
-  selectDoctor(doctor: Doctor): void {
-    this.doctorService.selectDoctor(doctor);
-  }
-
-  bookConsultation(doctor: Doctor, event: Event): void {
-    event.stopPropagation();
-    this.doctorService.openBooking(doctor);
+  onBook(doctor: Doctor): void {
+    this.bookingState.openBooking(doctor);
   }
 }
