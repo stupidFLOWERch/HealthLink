@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, effect, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, inject, effect, ChangeDetectorRef, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConsultationService } from '../../services/consultation.service';
 import { BookingStateService } from '../../services/booking-state.service';
@@ -16,11 +16,11 @@ export class MyConsultations implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   consultations: Consultation[] = [];
+  loadError = signal<string | null>(null);         // 👈 加
 
   constructor() {
-    // 监听「提交成功」信号，每次变化就重新拉数据
     effect(() => {
-      this.bookingState.consultationCreated();   // 读一下，建立依赖
+      this.bookingState.consultationCreated();
       this.loadConsultations();
     });
   }
@@ -29,10 +29,20 @@ export class MyConsultations implements OnInit {
     this.loadConsultations();
   }
 
-  private loadConsultations(): void {
-    this.consultationService.getConsultations().subscribe((data) => {
-      this.consultations = data;
-      this.cdr.detectChanges();
+  loadConsultations(): void {                      // 👈 改成 public，给 Retry 用
+    this.loadError.set(null);                      // 👈 清旧错误
+    this.consultationService.getConsultations().subscribe({
+      next: (data) => {                            // 👈 对象形式
+        this.consultations = data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {                            // 👈 加 error
+        console.error('Failed to load consultations:', err);
+        this.loadError.set(
+          err?.error?.error ?? 'Failed to load consultations. Please try again.'
+        );
+        this.cdr.detectChanges();                  // 👈 手动触发（因为你没换 signal 存 consultations）
+      },
     });
   }
 

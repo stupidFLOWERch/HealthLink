@@ -38,6 +38,7 @@ export class BookingForm {
 
   // 计算属性：每个 slot 带 disabled 标记
   readonly timeSlots: TimeSlot[] = this.buildTimeSlots();
+  readonly bookingError = signal<string | null>(null);
 
   private buildTimeSlots(): TimeSlot[] {
     const now = new Date();
@@ -77,6 +78,7 @@ export class BookingForm {
   }
 
   confirmBooking(): void {
+    this.bookingError.set(null);
     const doctor = this.bookingState.selectedDoctor();
     if (!doctor) return;
 
@@ -88,16 +90,22 @@ export class BookingForm {
       type: values.consultationType,
       preferredTime: this.resolvePreferredTime(values.preferredTime),
       reason: values.reason,
-    }).subscribe(() => {
-      this.bookingState.notifyConsultationCreated();
-      this.bookingSuccess.set(true);
-      setTimeout(() => {
-        this.bookingSuccess.set(false);
-        this.close();
-      }, 3000);
+    }).subscribe({
+      next: () => {
+        this.bookingState.notifyConsultationCreated();
+        this.bookingSuccess.set(true);
+        setTimeout(() => {
+          this.bookingSuccess.set(false);
+          this.close();
+        }, 3000);
+      },
+      error: (err) => {
+        console.error('Booking failed:', err);
+        this.bookingError.set(err?.error?.error ?? 'Booking failed. Please try again.');
+      },
     });
   }
-
+  
   private parseLabelToDate(label: string): Date {
     const [dayPart, timePart] = label.split(', ');
     const base = new Date();
