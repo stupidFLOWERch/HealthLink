@@ -3,10 +3,12 @@ import { Consultation, ConsultationType } from '../types/consultation';
 import { Doctor } from '../types/doctor';
 import { readJson, writeJson } from '../storage/jsonSotre';
 
-export function listConsultations(_req:Request, res:Response): void {
-    const consultations = readJson<Consultation>('consultations.json');
-    const sorted = [...consultations].sort((a, b) => b.id - a.id);   // ← 按 id 降序
-    res.json(sorted);
+export function listConsultations(_req: Request, res: Response): void {
+  const consultations = readJson<Consultation>('consultations.json');
+  const sorted = [...consultations].sort(
+    (a, b) => new Date(b.preferredTime).getTime() - new Date(a.preferredTime).getTime()
+  );
+  res.json(sorted);
 }
 
 export function createConsultation(req: Request, res: Response): void {

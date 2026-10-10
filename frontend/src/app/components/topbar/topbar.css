@@ -68,10 +68,11 @@
   background: #0284c7;
 }
 
-.nav-home-icon {
-  width: 15px;
-  height: 15px;
-  color: #0284c7;
+.home-img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  display: block;
 }
 
 .topbar-right {
