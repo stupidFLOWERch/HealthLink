@@ -170,3 +170,13 @@ backend/data/consultations.json:
   }
 ]
 ```
+
+## Data Files
+
+### `backend/data/doctors.json`
+
+![doctors.json](./screenshots/doctors-json.png)
+
+### `backend/data/consultations.json`
+
+![consultations.json](./screenshots/consultations-json.png)
